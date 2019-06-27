@@ -2,18 +2,25 @@
 
 # GOV: Grep and Open with Vim
 # Author : Ji-Hun Kim(jihuun.k@gmail.com)
-# v 0.2.0
+# v 0.3.0
 
 import os
 import sys
 
 tmp_outfile='.tmp_gov_result.txt'
+MGT_='\x1b[1;35m'
+_MGT='\x1b[1;m'
 
 result = list()
+target = None
+
+def give_color(text, search):
+    return text.replace(search, MGT_+search+_MGT)
 
 def grep_to_file():
-    arg=sys.argv[1]
-    cmd='grep -nr \"%s\" ./* > %s' %(arg, tmp_outfile)
+    global target
+    target=sys.argv[1]
+    cmd='grep -nr \"%s\" ./* > %s' %(target, tmp_outfile)
     os.system(cmd)
 
 def save_to_list():
@@ -33,7 +40,8 @@ def print_results():
     for i in range(len(result)):
         result[i][2] = result[i][2].replace('\t','')
         result[i][2] = result[i][2].replace('\n','')
-        print('%d: %-35s: %s'%(i, result[i][0], result[i][2]))
+        grep_result = give_color(result[i][2], target)
+        print('%-5d: %-35s: %s'%(i, result[i][0], grep_result))
     return
 
 def open_vim():
