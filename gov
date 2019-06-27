@@ -1,8 +1,8 @@
+#!/usr/bin/env python3
+
 # GOV: Grep and Open with Vim
 # Author : Ji-Hun Kim(jihuun.k@gmail.com)
 # v 0.1.0
-
-#! /usr/bin/env python3
 
 import os
 import sys
@@ -13,7 +13,7 @@ result = list()
 
 def grep_to_file():
     arg=sys.argv[1]
-    cmd='grep -nr %s ./* > %s' %(arg, tmp_outfile)
+    cmd='grep -nr \"%s\" ./* > %s' %(arg, tmp_outfile)
     os.system(cmd)
 
 def save_to_list():
