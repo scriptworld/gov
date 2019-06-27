@@ -2,7 +2,7 @@
 
 # GOV: Grep and Open with Vim
 # Author : Ji-Hun Kim(jihuun.k@gmail.com)
-# v 0.1.0
+# v 0.2.0
 
 import os
 import sys
@@ -25,11 +25,15 @@ def save_to_list():
             break
         line_info = line.split(':')
         result.append(line_info)
-        print('%d'%i, result[i])
+        #print('%d'%i, result[i])
         i = i + 1
     f.close()
 
 def print_results():
+    for i in range(len(result)):
+        result[i][2] = result[i][2].replace('\t','')
+        result[i][2] = result[i][2].replace('\n','')
+        print('%d: %-35s: %s'%(i, result[i][0], result[i][2]))
     return
 
 def open_vim():
